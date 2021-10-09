@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import com.ecommerce.sportyshoes.entity.Response;
 import com.ecommerce.sportyshoes.entity.User;
 import com.ecommerce.sportyshoes.service.OrderService;
 
+@Ignore
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class OrderServiceTest {
@@ -31,7 +33,7 @@ public class OrderServiceTest {
 	@Autowired
 	OrderService orderService;
 	
-	//@Test
+	@Test
 	public void saveOrderTest() {
 		Order order = prepareOrderObject();
 		Response response = orderService.saveOrder(order);
@@ -77,7 +79,7 @@ public class OrderServiceTest {
 		return order;
 	}
 
-	//@Test
+	@Test
 	public void getOrderTest() {
 		User user = new User();
 		Category category = new Category();

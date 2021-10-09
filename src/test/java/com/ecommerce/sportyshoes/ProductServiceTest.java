@@ -1,6 +1,8 @@
 package com.ecommerce.sportyshoes;
 
 import org.junit.Assert;
+import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,6 +17,7 @@ import com.ecommerce.sportyshoes.entity.ProductStock;
 import com.ecommerce.sportyshoes.entity.Response;
 import com.ecommerce.sportyshoes.service.ProductService;
 
+@Ignore
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ProductServiceTest {
@@ -23,7 +26,7 @@ public class ProductServiceTest {
 	ProductService productService;
 	
 	
-	//@Test
+	@Test
 	public void saveProducts() {
 		Product product = prepareProductObject();	
 		Response response = productService.saveProduct(product);
@@ -46,7 +49,7 @@ public class ProductServiceTest {
 		return product;
 	}
 
-	//@Test
+	@Test
 	public void addProductStockTest() {
 		Product product = new Product();
 		Brand brand = new Brand();
@@ -63,7 +66,7 @@ public class ProductServiceTest {
 		Assert.assertTrue(response != null && SportyShoesConstants.SUCCESS.equals(response.getStatus()));
 	}
 	
-	//@Test
+	@Test
 	public void updateProductStockTest() {
 		ProductStock productStock = new ProductStock();
 		productStock.setSkuId(2l);
@@ -73,7 +76,7 @@ public class ProductServiceTest {
 	    Assert.assertTrue(response != null && SportyShoesConstants.SUCCESS.equals(response.getStatus()));
 	}
 	
-	//@Test 
+	@Test 
 	public void getProductsTest() {
 		Product product = new Product();
 		product.setProductId(3l);

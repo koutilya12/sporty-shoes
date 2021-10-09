@@ -5,13 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +16,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.ecommerce.sportyshoes.constants.SportyShoesConstants;
 import com.ecommerce.sportyshoes.entity.Cart;
 import com.ecommerce.sportyshoes.entity.CartDetails;
-import com.ecommerce.sportyshoes.entity.OrderDetails;
 import com.ecommerce.sportyshoes.entity.ProductStock;
 import com.ecommerce.sportyshoes.entity.Response;
 import com.ecommerce.sportyshoes.entity.User;
 import com.ecommerce.sportyshoes.service.CartService;
-
+@Ignore
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class CartServiceTest {
@@ -34,7 +28,7 @@ public class CartServiceTest {
 	@Autowired
 	CartService cartService;
 	
-	//@Test
+	@Test
 	public void saveCartTest() {
 		Cart cart = prepareCartObject();
 		Response response = cartService.saveCart(cart);
@@ -79,14 +73,14 @@ public class CartServiceTest {
 		return cart;
 	}
 
-	//@Test
+	@Test
 	public void getCartTest() {
 	    Response response = (Response) cartService.getCart(3l);
 		Assert.assertTrue(response != null && SportyShoesConstants.SUCCESS.equals(response.getStatus()));
 
 	}
 	
-	//@Test
+	@Test
 	public void deleteCartTest() {
 		Response response = cartService.deleteCart(7l);
 		System.out.println(response);
