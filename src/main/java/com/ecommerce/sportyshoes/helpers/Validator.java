@@ -42,7 +42,9 @@ public class Validator {
 	}
 
 	public static String validateGetUsers(User user) {
-		
+		if(user == null) {
+			return "Invalid user";
+		}
 		return null;
 	}
 	
@@ -139,6 +141,9 @@ public class Validator {
 		}
 		if(order.getOrderDetails() == null) {
 			return "Invalid order details";
+		}
+		if(order.getTotQuantity() != order.getOrderDetails().size()) {
+			return "error in order details size";
 		}
 		if(order.getOrderDetails().get(0) != null) {
 			for(int i=0; i < order.getOrderDetails().size(); i++) {

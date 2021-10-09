@@ -1,5 +1,7 @@
 package com.ecommerce.sportyshoes.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,7 +12,11 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="order_details")
-public class OrderDetails {
+public class OrderDetails implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7614693322123768836L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

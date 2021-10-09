@@ -65,12 +65,12 @@ public class OrderServiceImpl implements OrderService {
 		if(errorMessage != null) {
 			return new Response(SportyShoesConstants.FAILED, errorMessage);
 		}
-		if(orderSearchCriteria.getUser() == null || orderSearchCriteria.getUser().getUserId() == null) {
+		if(orderSearchCriteria.getUserId() == null) {
 			userIdFlag = 0;  
 		} else {
 			userIdFlag = 1;
 		}
-		if(orderSearchCriteria.getCategory() == null || orderSearchCriteria.getCategory().getCategoryId() == null) {
+		if(orderSearchCriteria.getCategoryId() == null) {
 			categoryIdFlag = 0;  
 		} else {
 			categoryIdFlag = 1;
@@ -80,11 +80,11 @@ public class OrderServiceImpl implements OrderService {
 		} else {
 			dateFlag = 1;
 		}
-		List<Order> order = orderDao.getOrderList(orderSearchCriteria.getUser().getUserId(), userIdFlag, 
-				orderSearchCriteria.getCategory().getCategoryId(), categoryIdFlag, 
+		List<Order> orders = orderDao.getOrderList(orderSearchCriteria.getUserId(), userIdFlag, 
+				orderSearchCriteria.getCategoryId(), categoryIdFlag, 
 				orderSearchCriteria.getFromDate(), orderSearchCriteria.getToDate(), dateFlag);
-		if(order != null) {
-		return new Response(SportyShoesConstants.SUCCESS, order);
+		if(orders != null) {
+		return new Response(SportyShoesConstants.SUCCESS, orders);
 		} else {
 			return new Response(SportyShoesConstants.FAILED, "order list not found");
 		}

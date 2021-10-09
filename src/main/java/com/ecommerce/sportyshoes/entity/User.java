@@ -1,8 +1,6 @@
 package com.ecommerce.sportyshoes.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,7 +20,6 @@ public class User {
 	private String userName;
 	private String mobileNum;
 	private String emailId;
-	@Enumerated(EnumType.ORDINAL)
 	private UserType userType;
 	private UserStatus status;	
 	private String password;

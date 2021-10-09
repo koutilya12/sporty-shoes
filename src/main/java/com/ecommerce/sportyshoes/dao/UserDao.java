@@ -11,5 +11,4 @@ public interface UserDao extends JpaRepository<User, Long> {
 
 	@Query("SELECT u FROM User u WHERE u.emailId = :emailId and u.password =  :password")
 	User validateLogin(String emailId, String password);
-
 }

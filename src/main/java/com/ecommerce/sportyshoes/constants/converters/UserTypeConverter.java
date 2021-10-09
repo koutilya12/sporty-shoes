@@ -22,3 +22,4 @@ public class UserTypeConverter implements AttributeConverter<UserType, String> {
 	}
 
 }
+

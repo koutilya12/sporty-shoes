@@ -1,10 +1,8 @@
 package com.ecommerce.sportyshoes.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import com.ecommerce.sportyshoes.constants.SportyShoesConstants;
@@ -22,6 +20,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Response registerUser(User user) {
+		System.out.println("hi");
 		String errorMessage = Validator.validateUser(user);
 		if (errorMessage != null) {
 			return new Response(SportyShoesConstants.FAILED, errorMessage);
@@ -53,17 +52,11 @@ public class UserServiceImpl implements UserService {
 			return new Response(SportyShoesConstants.FAILED, errorMessage);
 		}
 		List<User> users = null;
-		if (user.getUserId() != null) {
-			Optional<User> userOption = userDao.findById(user.getUserId());
-			if(userOption.isPresent()) {
-				users = new ArrayList<>();
-				users.add(userOption.get());
-			}
-		}		
-		else
-			users = userDao.findAll();
-		return new Response(SportyShoesConstants.SUCCESS, users);
-
+		Example<User> example = Example.of(user);
+		users = userDao.findAll(example);	
+	    return new Response(SportyShoesConstants.SUCCESS, users);
 	}
-
 }
+
+   
+

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,16 +30,14 @@ public class Order {
 	private OrderStatus status;
 	private Date bookingTime;
 	private String transactionId;
-	@OneToOne
-	@JoinColumn(name = "cartId", referencedColumnName = "cartId")
-	private Cart cart;
+	private Long cartId;
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "orderId", referencedColumnName = "orderId")
 	private List<OrderDetails> orderDetails;
+	
 	public Long getOrderId() {
 		return orderId;
 	}
-	
 	public void setOrderId(Long orderId) {
 		this.orderId = orderId;
 	}
@@ -78,11 +77,11 @@ public class Order {
 	public void setTransactionId(String transactionId) {
 		this.transactionId = transactionId;
 	}
-	public Cart getCart() {
-		return cart;
+	public Long getCartId() {
+		return cartId;
 	}
-	public void setCart(Cart cart) {
-		this.cart = cart;
+	public void setCartId(Long cartId) {
+		this.cartId = cartId;
 	}
 	public List<OrderDetails> getOrderDetails() {
 		return orderDetails;
@@ -90,10 +89,11 @@ public class Order {
 	public void setOrderDetails(List<OrderDetails> orderDetails) {
 		this.orderDetails = orderDetails;
 	}
+	
 	@Override
 	public String toString() {
 		return "Order [orderId=" + orderId + ", user=" + user + ", totPrice=" + totPrice + ", totQuantity="
 				+ totQuantity + ", status=" + status + ", bookingTime=" + bookingTime + ", transactionId="
-				+ transactionId + ", cart=" + cart + ", orderDetails=" + orderDetails + "]";
-	}
+				+ transactionId + ", cartId=" + cartId + ", orderDetails=" + orderDetails + "]";
+	}	
 }
