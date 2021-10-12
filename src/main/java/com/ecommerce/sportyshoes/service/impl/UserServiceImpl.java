@@ -1,6 +1,12 @@
 package com.ecommerce.sportyshoes.service.impl;
 
 import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
@@ -56,6 +62,24 @@ public class UserServiceImpl implements UserService {
 		users = userDao.findAll(example);	
 	    return new Response(SportyShoesConstants.SUCCESS, users);
 	}
+
+	@Transactional
+	@Override
+	public Response changePassword(User user, String newPassword) {
+		String errorMessage = Validator.validateChangePassword(user, newPassword);
+		if(errorMessage != null) {
+			return new Response(SportyShoesConstants.FAILED, errorMessage);
+		}
+		if(userDao.validateChangePassword(user.getUserId(), user.getPassword()) == null) {
+			return new Response(SportyShoesConstants.FAILED, "Old password Incorrect");
+		}
+		if(userDao.changePassword(newPassword, user.getPassword()) != 0) {
+			return new Response(SportyShoesConstants.SUCCESS, "Password changed successfully");
+		} else {
+			return new Response(SportyShoesConstants.FAILED, "Password change failed");
+		}
+	}
+
 }
 
    

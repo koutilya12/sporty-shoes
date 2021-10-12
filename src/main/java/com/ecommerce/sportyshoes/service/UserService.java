@@ -25,5 +25,11 @@ public interface UserService {
 	 */
 	public Response getUsers(User user);
 	
+	/**
+	 * Change password
+	 * @param user
+	 * @return Response with status success if successfully changed or  else returns error Message.
+	 */
+	public Response changePassword(User user, String newPassword);
 	
 }

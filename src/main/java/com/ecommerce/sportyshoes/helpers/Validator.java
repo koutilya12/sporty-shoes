@@ -166,4 +166,17 @@ public class Validator {
 		}
 		return null;
 	}
+
+	public static String validateChangePassword(User user, String newPassword) {
+		if (user.getUserId() == 0l) {
+			return "user id is empty";
+		}
+		if (user.getPassword() == null) {
+			return "old password is empty";
+		}
+		if(newPassword == null) {
+			return "new password is empty";
+		}
+		return null;
+	}
 }

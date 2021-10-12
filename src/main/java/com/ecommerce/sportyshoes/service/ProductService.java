@@ -6,7 +6,7 @@ import com.ecommerce.sportyshoes.entity.Response;
 
 public interface ProductService {
 	/**
-	 * Insert mew products
+	 * Insert new products
 	 * @param product
 	 * @return Success message if saved successfully else error message
 	 */

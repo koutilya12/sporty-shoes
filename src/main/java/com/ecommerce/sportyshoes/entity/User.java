@@ -59,16 +59,19 @@ public class User {
 	public void setStatus(UserStatus status) {
 		this.status = status;
 	}
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", userName=" + userName + ", mobileNum=" + mobileNum + ", emailId=" + emailId
-				+ ", userType=" + userType + ", status=" + status + "]";
-	}
+
+
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", userName=" + userName + ", mobileNum=" + mobileNum + ", emailId=" + emailId
+				+ ", userType=" + userType + ", status=" + status + ", password=" + password + "]";
 	}
 }
 

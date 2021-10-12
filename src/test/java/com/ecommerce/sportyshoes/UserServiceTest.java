@@ -15,7 +15,7 @@ import com.ecommerce.sportyshoes.entity.Response;
 import com.ecommerce.sportyshoes.entity.User;
 import com.ecommerce.sportyshoes.service.UserService;
 
-@Ignore
+//@Ignore
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserServiceTest {
@@ -23,7 +23,7 @@ public class UserServiceTest {
 	@Autowired
 	UserService userService;
 	
-	@Test
+	//@Test
 	public void registerUserTest() {
 		User user = new User();
 		user.setUserName("James");
@@ -37,7 +37,7 @@ public class UserServiceTest {
 		Assert.assertTrue(response != null && SportyShoesConstants.SUCCESS.equals(response.getStatus()));	
 	}
 	
-	@Test
+	//@Test
 	public void loginUser() {
 		User user = new User();
 		user.setEmailId("james@gmail.com");
@@ -46,12 +46,32 @@ public class UserServiceTest {
 		Assert.assertTrue(response != null && SportyShoesConstants.SUCCESS.equals(response.getStatus()));	
 	}
 	
-	@Test
+	//@Test
 	public void getUsers() {
 		User user = new User();
 		user.setStatus(UserStatus.ACTIVE);
 		Response response = userService.getUsers(user);
-		System.out.println(response.getData());
 		Assert.assertTrue(response != null && SportyShoesConstants.SUCCESS.equals(response.getStatus()));	
 	}
+	
+	@Ignore
+	@Test 
+	public void changePasswordTest() {
+		User user = new User();
+		user.setUserId(3l);
+		user.setPassword("sarath@123");
+		String newPassword = "sarath@new1231";
+		Response response = userService.changePassword(user, newPassword);
+		Assert.assertTrue(response != null && SportyShoesConstants.SUCCESS.equals(response.getStatus()));	
+		}
+	
+	@Test 
+	public void changePasswordTestWithWrongPassword() {
+		User user = new User();
+		user.setUserId(3l);
+		user.setPassword("sarath@123");
+		String newPassword = "sarath@new1231";
+		Response response = userService.changePassword(user, newPassword);
+		Assert.assertTrue(response != null && SportyShoesConstants.FAILED.equals(response.getStatus()) && "Old password Incorrect".equals(response.getErrorMessage()));	
+		}
 }
