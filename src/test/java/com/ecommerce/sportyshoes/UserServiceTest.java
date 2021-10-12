@@ -15,7 +15,7 @@ import com.ecommerce.sportyshoes.entity.Response;
 import com.ecommerce.sportyshoes.entity.User;
 import com.ecommerce.sportyshoes.service.UserService;
 
-//@Ignore
+@Ignore
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserServiceTest {
@@ -23,7 +23,7 @@ public class UserServiceTest {
 	@Autowired
 	UserService userService;
 	
-	//@Test
+	@Test
 	public void registerUserTest() {
 		User user = new User();
 		user.setUserName("James");
@@ -37,7 +37,7 @@ public class UserServiceTest {
 		Assert.assertTrue(response != null && SportyShoesConstants.SUCCESS.equals(response.getStatus()));	
 	}
 	
-	//@Test
+	@Test
 	public void loginUser() {
 		User user = new User();
 		user.setEmailId("james@gmail.com");
@@ -46,7 +46,7 @@ public class UserServiceTest {
 		Assert.assertTrue(response != null && SportyShoesConstants.SUCCESS.equals(response.getStatus()));	
 	}
 	
-	//@Test
+	@Test
 	public void getUsers() {
 		User user = new User();
 		user.setStatus(UserStatus.ACTIVE);
@@ -54,7 +54,7 @@ public class UserServiceTest {
 		Assert.assertTrue(response != null && SportyShoesConstants.SUCCESS.equals(response.getStatus()));	
 	}
 	
-	@Ignore
+	
 	@Test 
 	public void changePasswordTest() {
 		User user = new User();

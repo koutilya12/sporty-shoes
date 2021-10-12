@@ -28,7 +28,6 @@ public class UserController {
 	
 	@PostMapping("/saveUser")
 	public @ResponseBody Response saveUser(@RequestBody User user) {
-		System.out.println("yse i am here");
 		return userService.registerUser(user);
 	}
 	
@@ -41,16 +40,13 @@ public class UserController {
 	public @ResponseBody  Response changePassword(@RequestBody ObjectNode  requestMap) {
 		User user= null;
 		String newPassword = null;
-		System.out.println(requestMap.toString());
 		if(requestMap.get("user") != null) {
 			ObjectMapper mapper = new ObjectMapper();
 			try {
 				user  = mapper.treeToValue(requestMap.get("user"), User.class);
 			} catch (JsonMappingException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (JsonProcessingException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -59,9 +55,7 @@ public class UserController {
 		if(requestMap.get("newPassword") != null) {
 			newPassword  = requestMap.get("newPassword").asText();
 		}
-		
-		System.out.println("ss"+ user.toString());
-		System.out.print("qwq"+newPassword);
+		System.out.println(userService.changePassword(user, newPassword));
 		return userService.changePassword(user, newPassword);
 	}
 }

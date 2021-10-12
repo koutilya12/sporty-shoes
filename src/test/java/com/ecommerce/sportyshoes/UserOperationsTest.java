@@ -1,5 +1,6 @@
 package com.ecommerce.sportyshoes;
 
+import static org.hamcrest.CoreMatchers.any;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -7,9 +8,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -36,21 +41,22 @@ public class UserOperationsTest {
 	@MockBean
 	private UserService service;
 	
+	@Ignore 
 	@Test
 	public void saveUsersTest() throws Exception {
-		User user = prapareUserObject();	
-     	String requestBody = convertObjectToJsonString(user);
-     	System.out.println("req" + requestBody);
-     	Response response = new Response(SportyShoesConstants.SUCCESS); 
-	    when(service.registerUser(user)).thenReturn(response);
-		this.mockMvc.perform(post("/saveUser").contentType(MediaType.APPLICATION_JSON).content(requestBody )).andDo(print()).andExpect(status().isOk())
+		User user = prepareUserObject();
+		String requestBody = convertObjectToJsonString(user);
+		Response response = new Response(SportyShoesConstants.SUCCESS);
+		when(service.registerUser(Mockito.any(user.getClass()))).thenReturn(response);
+		this.mockMvc.perform(post("/saveUser").contentType(MediaType.APPLICATION_JSON).content(requestBody))
+				.andDo(print()).andExpect(status().isOk())
 				.andExpect(content().string(containsString(convertObjectToJsonString(response))));
-		
 	}
 
-	private User prapareUserObject() {		
+	private User prepareUserObject() {		
 		User user = new User();
-		user.setStatus(UserStatus.ACTIVE);
+		user.setUserId(4l);
+		user.setPassword("mkt@new123");
 		return user;
 	}
 
@@ -63,4 +69,21 @@ public class UserOperationsTest {
 		}
 		return null;
 	}
+	
+	@Test
+	public void changePasswordTest() throws Exception {
+		User user = prepareUserObject();
+		String newPassword =  "mkt@new123";
+		Map<String, Object> requestMap = new HashMap<>();
+		requestMap.put("newPassword" , newPassword);
+		requestMap.put("user", user);
+		String requestBody = convertObjectToJsonString(requestMap);
+		Response response = new Response(SportyShoesConstants.SUCCESS);
+		when(service.changePassword(Mockito.any(user.getClass()),Mockito.any(String.class))).thenReturn(response);
+		this.mockMvc.perform(post("/changePassword").contentType(MediaType.APPLICATION_JSON).content(requestBody))
+				.andDo(print()).andExpect(status().isOk())
+				.andExpect(content().string(containsString(convertObjectToJsonString(response))));
+	}
 }
+
+	
